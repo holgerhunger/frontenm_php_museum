@@ -12,7 +12,7 @@
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeAZ9hiJ-Ek-_EeA.woff2"
           as="font" fetchpriority="high">
 
-    <script src="script.js" defer></script>
+<!--    <script src="script.js" defer></script>-->
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,12 +23,21 @@
     <h1><img src="images/logo.png" alt="Frontend Masters Museum" width="300"
             fetchpriority="high"></h1>
     <main>
-        <article>
-            <h2>Life in Ancient Greek</h2>
-            <p>Uncover the world of ancient Greece through the sculptures, tools, and jewelry found in ruins from over 2000 years ago that have been unearthed through modern science and technology.</p>
-            <img src="gallery/ancient-greece.png"
-                    fetchpriority="high" decoding="sync">
-        </article>
+        <?php
+            include 'data/data.php';
+        if (isset($exhibits)) {
+            foreach ($exhibits as $item):
+        ?>
+            <article>
+                <h2><?php echo $item['title']?></h2>
+                <p><?php echo $item['description']?></p>
+                <img src="gallery/<?php echo $item['image']?>"
+                        fetchpriority="high" decoding="sync">
+            </article>
+        <?php
+            endforeach;
+        }
+        ?>
     </main>
 </body>
 </html>
