@@ -6,13 +6,14 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=optional" 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=optional"
           rel="stylesheet">
 
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeAZ9hiJ-Ek-_EeA.woff2"
+    <link rel="preload"
+          href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeAZ9hiJ-Ek-_EeA.woff2"
           as="font" fetchpriority="high">
 
-<!--    <script src="script.js" defer></script>-->
+    <!--    <script src="script.js" defer></script>-->
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,26 +21,27 @@
     <title>Frontend Museum</title>
 </head>
 <body>
-    <h1><img src="images/logo.png" alt="Frontend Masters Museum" width="300"
-            fetchpriority="high"></h1>
-    <main>
-        <?php
-            $json = file_get_contents('data/data.json');
-            $exhibits = json_decode($json, true);
+<h1><img src="images/logo.png" alt="Frontend Masters Museum" width="300"
+         fetchpriority="high"></h1>
+<main>
+    <?php
+    include "classes.php";
+    $db = new DB();
+    $exhibits = $db->execute('SELECT * FROM exhibits');
 
-        if (isset($exhibits)) {
-            foreach ($exhibits as $item):
-        ?>
+    if (isset($exhibits)) {
+        foreach ($exhibits as $item):
+            ?>
             <article>
-                <h2><?php echo $item['title']?></h2>
-                <p><?php echo $item['description']?></p>
-                <img src="gallery/<?php echo $item['image']?>"
-                        fetchpriority="high" decoding="sync">
+                <h2><?php echo $item['title'] ?></h2>
+                <p><?php echo $item['description'] ?></p>
+                <img src="gallery/<?php echo $item['image'] ?>"
+                     fetchpriority="high" decoding="sync">
             </article>
         <?php
-            endforeach;
-        }
-        ?>
-    </main>
+        endforeach;
+    }
+    ?>
+</main>
 </body>
 </html>
