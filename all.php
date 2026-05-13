@@ -24,9 +24,7 @@
             fetchpriority="high"></h1>
     <main>
         <?php
-            $json = file_get_contents('data/data.json');
-            $exhibits = json_decode($json, true);
-
+            include 'data/data.php';
         if (isset($exhibits)) {
             foreach ($exhibits as $item):
         ?>
