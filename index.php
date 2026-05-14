@@ -1,47 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="background.css">
+<?php include "header_inc.php"; ?>
+    <main>
+        <ul>
+            <?php
+            include "classes.php";
+            $db = new DB();
+            $exhibits = $db->execute('SELECT * FROM exhibits');
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=optional"
-          rel="stylesheet">
-
-    <link rel="preload"
-          href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeAZ9hiJ-Ek-_EeA.woff2"
-          as="font" fetchpriority="high">
-
-    <!--    <script src="script.js" defer></script>-->
-
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontend Museum</title>
-</head>
-<body>
-<h1><img src="images/logo.png" alt="Frontend Masters Museum" width="300"
-         fetchpriority="high"></h1>
-<main>
-    <?php
-    include "classes.php";
-    $db = new DB();
-    $exhibits = $db->execute('SELECT * FROM exhibits');
-
-    if (isset($exhibits)) {
-        foreach ($exhibits as $item):
+            if (isset($exhibits)) {
+                foreach ($exhibits as $item):
+                    ?>
+                    <li>
+                        <h3>
+                            <a href="details.php?id=<?php echo $item['id'] ?>"><?php echo $item['title'] ?></a>
+                        </h3>
+                    </li>
+                <?php
+                endforeach;
+            }
             ?>
-            <article>
-                <h2><?php echo $item['title'] ?></h2>
-                <p><?php echo $item['description'] ?></p>
-                <img src="gallery/<?php echo $item['image'] ?>"
-                     fetchpriority="high" decoding="sync">
-            </article>
-        <?php
-        endforeach;
-    }
-    ?>
-</main>
-</body>
-</html>
+        </ul>
+    </main>
+<?php include "footer_inc.php"; ?>
